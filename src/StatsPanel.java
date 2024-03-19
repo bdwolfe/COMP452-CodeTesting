@@ -37,20 +37,7 @@ public class StatsPanel extends JPanel {
         resultsPanel.add(new JLabel("Guesses"));
         resultsPanel.add(new JLabel("Games"));
         for(int binIndex=0; binIndex<BIN_EDGES.length; binIndex++){
-            String binName;
-            if(binIndex == BIN_EDGES.length-1){
-                // last bin
-                binName = BIN_EDGES[binIndex] + " or more";
-            }
-            else{
-                int upperBound = BIN_EDGES[binIndex+1] - 1;
-                if(upperBound > BIN_EDGES[binIndex]){
-                    binName = BIN_EDGES[binIndex] + "-" + upperBound;
-                }
-                else{
-                    binName = Integer.toString(BIN_EDGES[binIndex]);
-                }
-            }
+            String binName = getBinName(binIndex);
 
             resultsPanel.add(new JLabel(binName));
             JLabel result = new JLabel("--");
@@ -81,6 +68,24 @@ public class StatsPanel extends JPanel {
                 updateResultsPanel();
             }
         });
+    }
+
+    private static String getBinName(int binIndex) {
+        String binName;
+        if(binIndex == BIN_EDGES.length-1){
+            // last bin
+            binName = BIN_EDGES[binIndex] + " or more";
+        }
+        else{
+            int upperBound = BIN_EDGES[binIndex +1] - 1;
+            if(upperBound > BIN_EDGES[binIndex]){
+                binName = BIN_EDGES[binIndex] + "-" + upperBound;
+            }
+            else{
+                binName = Integer.toString(BIN_EDGES[binIndex]);
+            }
+        }
+        return binName;
     }
 
 
